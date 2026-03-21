@@ -1,12 +1,10 @@
 ## Anomaly Analysis
 
 ### Insert Anomaly
-Product data (product_id, product_name) is tied to order_id. For example, Product P101 appears in Row 2 and Row 5 only with orders. We cannot insert a new product without creating an order.
+An insert anomaly occurs when it is not possible to add new data into the database without including unnecessary or unrelated information. In the given dataset, product information such as product_id and product_name is directly tied to order_id. For example, Product P101 appears in Row 2 and Row 5 only when there is an associated order. This means that if the company wants to add a new product to its catalog, it cannot do so unless a corresponding order is also created. This leads to the creation of fake or incomplete order records just to store product data. Such a design restricts flexibility and makes the system inefficient for handling independent data entities like products.
 
 ### Update Anomaly
-Product P101 appears in multiple rows (Row 2, Row 6, Row 9). If the price changes, it must be updated in all rows, otherwise inconsistent data may occur.
+An update anomaly occurs when the same piece of information is stored in multiple rows and must be updated in all those places. In this dataset, Product P101 appears in multiple rows such as Row 2, Row 6, and Row 9. If there is a change in the product’s price or category, the update must be applied to all these rows. If even one row is missed during the update process, it results in inconsistent and unreliable data. This redundancy increases the risk of human error and makes data maintenance more complex. It also reduces data integrity, as different rows may show different values for the same product.
 
 ### Delete Anomaly
-Product P105 appears only in Row 10. Deleting this row will remove all information about the product and associated customer.
-
-
+A delete anomaly occurs when deleting a record unintentionally removes important information. In this dataset, Product P105 appears only in Row 10. If this row is deleted, all information related to that product, along with associated customer and order details, will also be lost. This is problematic because the deletion of an order should not remove essential product or customer information. Such a structure leads to data loss and affects the overall reliability of the system.
